@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CollegeBot Chat</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyTmgBBvScbAD4hFhF2jzn8m3L+2dA2YDh" crossorigin="anonymous">
+    <style>
+        /* Reset default margin and padding */
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        /* Set chat container to fill the entire window */
+        .chat-container {
+            display: flex;
+            height: 100%;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar {
+            flex: 0.25; /* Adjust this value to control the width */
+            padding: 20px;
+            background-color: #f0f0f0;
+            overflow-y: auto;
+        }
+        .chat-box {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+        .chat-header {
+            padding: 10px;
+            background-color: #3498db;
+            color: #fff;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .message {
+            margin-bottom: 8px;
+            padding: 8px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            max-width: 70%; /* Limit message width */
+        }
+        .user-message {
+            background-color: #e2f7cb;
+            align-self: flex-start;
+        }
+        .bot-message {
+            background-color: #f0f0f0;
+            align-self: flex-end;
+        }
+        /* Bootstrap classes for the input container */
+        .input-container {
+            display: flex;
+            flex-shrink: 0; /* Prevents it from shrinking too much */
+            padding: 15px; /* Adjusted padding for increased height */
+            border-top: 1px solid #ccc;
+        }
+        .input-container input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+        .input-container button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #3498db;
+            color: #fff;
+        }
+        .input-container button:hover {
+            background-color: #2980b9;
+        }
+        .chat-log {
+            padding: 20px;
+            overflow-y: auto;
+            margin-top: 20px; /* Adjust header height */
+            margin-bottom: 20px; /* Adjust input container height */
+            height: calc(100% - 60px); /* Adjust header and input container heights */
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="sidebar">
+            <h3>Recent Searches</h3>
+            <!-- Add content for recent searches here -->
+        </div>
+        <div class="chat-box">
+            <div class="chat-header">
+                <h2>CollegeBot Chat</h2>
+            </div>
+            <div class="chat-log" id="chat-log">
+                <!-- Chat log will be displayed here -->
+            </div>
+            <!-- Bootstrap-based input container -->
+            <div class="input-container">
+                <input type="text" class="form-control" id="user-input" placeholder="Type your message...">
+                <button class="btn btn-primary" onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXJp4MDFqjsLD+qI6pvhROGxEUze8lUWW/1Z" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyTmgBBvScbAD4hFhF2jzn8m3L+2dA2YDh" crossorigin="anonymous"></script>
+
+    <script>
+        // JavaScript functions for interacting with the chat interface
+        function appendMessage(message, className) {
+            var chatLog = document.getElementById('chat-log');
+            var messageElem = document.createElement('div');
+            messageElem.className = 'message ' + className;
+            messageElem.innerText = message;
+
+            var lineBreak = document.createElement('br');
+
+            chatLog.appendChild(messageElem);
+            chatLog.appendChild(lineBreak);
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+
+        function sendMessage() {
+            var userInput = document.getElementById('user-input').value;
+            if (userInput.trim() === '') return;
+
+            appendMessage('You: ' + userInput, 'user-message');
+
+            // Send user message to the backend (you'll need to implement this using AJAX or similar)
+            // Retrieve bot response and call appendMessage with the response and 'bot-message' class
+
+            alert('CollegeBot: This is a response from the chatbot.');
+
+            document.getElementById('user-input').value = '';
+        }
+    </script>
+</body>
+</html>
